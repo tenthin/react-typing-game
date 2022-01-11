@@ -32,13 +32,28 @@ function App() {
   const [userInput, setUserInput] = useState('')
   const cloud = useRef(getCloud())
 
-  const [activeWrodIndex, setActiveWrodIndex] = useState(0)
+  const [activeWordIndex, setactiveWordIndex] = useState(0)
+  const[correctWordArray,setCorrectWordArray] = useState([])
+
 
   function processInput(value) {
     if(value.endsWith(' ')) {
       // that means the user has finised this word
-      setActiveWrodIndex(index => index + 1)
+      setactiveWordIndex(index => index + 1)
       setUserInput(' ')
+
+      
+    
+          // correct word
+          setCorrectWordArray(data => {
+            const word = value.trim()
+            const newResult = [...data]
+            newResult[activeWordIndex] = true
+            return word=== cloud.current[activeWordIndex]
+          })
+
+
+
     }else{
       setUserInput(value)
     }
@@ -51,8 +66,8 @@ function App() {
 
         return <Word 
                 text={word} 
-                active = {index ===activeWrodIndex}
-                correct = {null}
+                active = {index ===activeWordIndex}
+                correct = {correctWordArray[index]}
                 />
       })}</p>
 
