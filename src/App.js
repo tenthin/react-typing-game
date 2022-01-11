@@ -7,6 +7,26 @@ windows bitcoin dogecoin mars tesla space editors mars earth heater water air ja
 react boat blanket`.split(' ')
 // .sort(() => Math.random() > 0.5 ? 1 : -1)
 
+function Word(props) {
+
+  const { text, active, correct} = props
+
+  if (correct === true) {
+    return <span className='correct'>{text} </span>
+  }
+
+  if (correct === false) {
+    return <span className='incorrect'>{text} </span>
+  }
+
+  if (active) {
+    return <span className='active'>{text} </span>
+  }
+
+  return <span>{text} </span>
+}
+
+
 function App() {
 
   const [userInput, setUserInput] = useState('')
@@ -29,11 +49,11 @@ function App() {
       <h1>Typing Test</h1>
       <p>{cloud.current.map((word, index) => {
 
-        if(index == activeWrodIndex) {
-          return <b>{word} </b>
-        }
-
-        return <span>{word} </span> 
+        return <Word 
+                text={word} 
+                active = {index ===activeWrodIndex}
+                correct = {null}
+                />
       })}</p>
 
       <input 
