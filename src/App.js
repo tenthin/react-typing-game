@@ -37,19 +37,21 @@ function App() {
 
 
   function processInput(value) {
+
+    // TODO: add validation for the quiz end
+    // Word count and timer
     if(value.endsWith(' ')) {
       // that means the user has finised this word
       setactiveWordIndex(index => index + 1)
       setUserInput(' ')
 
-      
-    
           // correct word
           setCorrectWordArray(data => {
             const word = value.trim()
             const newResult = [...data]
             newResult[activeWordIndex] = true
-            return word=== cloud.current[activeWordIndex]
+            newResult[activeWordIndex] = word=== cloud.current[activeWordIndex]
+            return newResult;
           })
 
 
