@@ -50,8 +50,8 @@ function Timer(props) {
   const minutes = timeElapsed/60 
 
   return <div>
-      <p>Time: {timeElapsed}</p>
-      <p>Speed: {((correctWords/minutes) || 0).toFixed(2)}WPM</p>
+      <p><b>Time:</b> {timeElapsed}</p>
+      <p><b>Speed:</b> {((correctWords/minutes) || 0).toFixed(2)}WPM</p>
     </div>
 }
 function App() {
@@ -70,8 +70,6 @@ function App() {
       setStartCounting(true)
     }
     
-    // TODO: add validation for the quiz end
-    // Word count and timer
     if(value.endsWith(' ')) {
       // that means the user has finised this word
 
@@ -79,13 +77,13 @@ function App() {
         // that means we are about to over flow
         setStartCounting(false)
         setUserInput('Completed')
-        return
+      }else{
+        setUserInput('')
       }
 
 
-
       setactiveWordIndex(index => index + 1)
-      setUserInput(' ')
+
 
           // correct word
           setCorrectWordArray(data => {
@@ -120,7 +118,8 @@ function App() {
                 />
       })}</p>
   
-      <input  
+      <input
+      placeholder='Start typing...'
       type="text" 
       value={userInput} 
       onChange={(e) => processInput(e.target.value)}
