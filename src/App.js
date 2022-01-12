@@ -43,29 +43,36 @@ Word = React.memo(Word)
 
 function Timer(props) {
 
-  const [speed, setSpeed] = useState(0)
+  const [timeElapsed, setTimeElapsed] = useState(0)
 
   useEffect(() => {
     if(props.startCounting) {
       setInterval(() => {
 
+        setTimeElapsed(oldTime => oldTime + 1)
       },1000)
     }
     },[props.startCounting])
 
 
-  return <p>Spped: {speed}</p>
+  return <p>Spped: {timeElapsed}</p>
 }
 function App() {
 
   const [userInput, setUserInput] = useState('')
   const cloud = useRef(getCloud())
 
+  const [startCounting, setStartCounting] = useState(false)
+
   const [activeWordIndex, setactiveWordIndex] = useState(0)
   const[correctWordArray,setCorrectWordArray] = useState([])
 
   function processInput(value) {
 
+    if(!startCounting) {
+      setStartCounting(true)
+    }
+    
     // TODO: add validation for the quiz end
     // Word count and timer
     if(value.endsWith(' ')) {
@@ -94,7 +101,7 @@ function App() {
 
       <h1>Typing Test</h1>
       <Timer 
-        startCounting={false}
+        startCounting={startCounting}
       />
       <p>{cloud.current.map((word, index) => {
 
