@@ -41,7 +41,7 @@ function Word(props) {
 
 Word = React.memo(Word)
 
-function Timer() {
+function Timer(props) {
 
   const [speed, setSpeed] = useState(0)
 
@@ -93,7 +93,9 @@ function App() {
     <div>
 
       <h1>Typing Test</h1>
-      <Timer />
+      <Timer 
+        startCounting={false}
+      />
       <p>{cloud.current.map((word, index) => {
 
         return <Word 
