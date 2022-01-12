@@ -11,31 +11,19 @@ function Word(props) {
 
   const { text, active, correct} = props
 
-  const rerender = useRef(0)
-  
-  useEffect(() => {
-    rerender.current += 1
-    })
-
-
-    
-
-
-
-
   if (correct === true) {
-    return <span className='correct'>{text}{rerender.current} </span>
+    return <span className='correct'>{text} </span>
   }
 
   if (correct === false) {
-    return <span className='incorrect'>{text}{rerender.current} </span>
+    return <span className='incorrect'>{text} </span>
   }
 
   if (active) {
-    return <span className='active'>{text}{rerender.current} </span>
+    return <span className='active'>{text} </span>
   }
 
-  return <span>{text}{rerender.current} </span>
+  return <span>{text} </span>
 }
 
 
