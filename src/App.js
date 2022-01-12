@@ -42,20 +42,24 @@ function Word(props) {
 Word = React.memo(Word)
 
 function Timer(props) {
-
+  const {correctWords, startCounting} = props
   const [timeElapsed, setTimeElapsed] = useState(0)
 
   useEffect(() => {
-    if(props.startCounting) {
+    if(startCounting) {
       setInterval(() => {
 
         setTimeElapsed(oldTime => oldTime + 1)
       },1000)
     }
-    },[props.startCounting])
+    },[startCounting])
+  
+  const minutes = timeElapsed/60 
 
-
-  return <p>Spped: {timeElapsed}</p>
+  return <div>
+      <p>Time: {timeElapsed}</p>
+      <p>Speed: {(correctWords/minutes) || 0} WPM</p>
+    </div>
 }
 function App() {
 
@@ -102,6 +106,7 @@ function App() {
       <h1>Typing Test</h1>
       <Timer 
         startCounting={startCounting}
+        correctWords={setCorrectWordArray.filter(Boolean).length}
       />
       <p>{cloud.current.map((word, index) => {
 
