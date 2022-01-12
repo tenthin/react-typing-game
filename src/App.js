@@ -18,7 +18,7 @@ function Word(props) {
     })
 
 
-
+    
 
 
 
@@ -38,8 +38,24 @@ function Word(props) {
   return <span>{text}{rerender.current} </span>
 }
 
+
 Word = React.memo(Word)
 
+function Timer() {
+
+  const [speed, setSpeed] = useState(0)
+
+  useEffect(() => {
+    if(props.startCounting) {
+      setInterval(() => {
+
+      },1000)
+    }
+    },[props.startCounting])
+
+
+  return <p>Spped: {speed}</p>
+}
 function App() {
 
   const [userInput, setUserInput] = useState('')
@@ -47,7 +63,6 @@ function App() {
 
   const [activeWordIndex, setactiveWordIndex] = useState(0)
   const[correctWordArray,setCorrectWordArray] = useState([])
-
 
   function processInput(value) {
 
@@ -76,7 +91,9 @@ function App() {
   return (
 
     <div>
+
       <h1>Typing Test</h1>
+      <Timer />
       <p>{cloud.current.map((word, index) => {
 
         return <Word 
@@ -85,12 +102,14 @@ function App() {
                 correct = {correctWordArray[index]}
                 />
       })}</p>
-
-      <input 
+  
+      <input  
       type="text" 
       value={userInput} 
       onChange={(e) => processInput(e.target.value)}
       />
+    
+
 
     </div>
   );

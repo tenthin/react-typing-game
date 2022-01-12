@@ -10,6 +10,10 @@
   background-color: black;
 }
 
+.input{
+  visibility: hidden;
+}
+
 .active {
   font-weight: bold;
 }
