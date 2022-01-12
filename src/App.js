@@ -58,7 +58,7 @@ function Timer(props) {
 
   return <div>
       <p>Time: {timeElapsed}</p>
-      <p>Speed: {(correctWords/minutes) || 0} WPM</p>
+      <p>Speed: {correctWords/minutes || 0} WPM</p>
     </div>
 }
 function App() {
@@ -106,7 +106,7 @@ function App() {
       <h1>Typing Test</h1>
       <Timer 
         startCounting={startCounting}
-        correctWords={setCorrectWordArray.filter(Boolean).length}
+        correctWords={correctWordArray.filter(Boolean).length}
       />
       <p>{cloud.current.map((word, index) => {
 
