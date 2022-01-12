@@ -46,11 +46,16 @@ function Timer(props) {
   const [timeElapsed, setTimeElapsed] = useState(0)
 
   useEffect(() => {
+    let id
     if(startCounting) {
-      setInterval(() => {
+      id = setInterval(() => {
 
         setTimeElapsed(oldTime => oldTime + 1)
       },1000)
+    }
+
+    return() => {
+      clearInterval(id)
     }
     },[startCounting])
   
@@ -81,6 +86,16 @@ function App() {
     // Word count and timer
     if(value.endsWith(' ')) {
       // that means the user has finised this word
+
+      if(activeWordIndex === cloud.current.length-1) {
+        // that means we are about to over flow
+        setStartCounting(false)
+        setUserInput('Completed')
+        return
+      }
+
+
+
       setactiveWordIndex(index => index + 1)
       setUserInput(' ')
 
